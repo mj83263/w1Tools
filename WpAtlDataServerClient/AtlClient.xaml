@@ -1,0 +1,85 @@
+﻿<Page x:Class="WpAtlDataServerClient.AtlClient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpAtlDataServerClient"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AtlClient">
+    <Page.Resources>
+        <local:DOrderInfoList x:Key="OrderInfosKey"></local:DOrderInfoList>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" Background="CadetBlue" Grid.Row="0">
+            <AccessText Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" >Atl 数据服务器客户端</AccessText>
+        </DockPanel>
+        <DockPanel Grid.Row="1" LastChildFill="True" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <AccessText Margin="10 0 5 0">服务器Ip:</AccessText>
+            <TextBox Name="Tb_Ip" Width="100">127.0.0.1</TextBox>
+            <AccessText Margin="10 0 0 0">端口:</AccessText>
+            <TextBox Name="Tb_Port" Width="80">54636</TextBox>
+            <Button Name="Bt_Connect" Width="80" Margin="10,0,5,0" Click="Bt_Connect_Click">联接</Button>
+        </DockPanel>
+        <DockPanel Grid.Row="2"  Background="AliceBlue">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DockPanel LastChildFill="True" >
+                    <CheckBox x:Name="Ck_Sent" Width="100" FlowDirection="LeftToRight"  Content="定时发送" VerticalAlignment="Center"></CheckBox>
+                    <Button Name="Bt_Sent" Click="Bt_Sent_Click">发送</Button>
+                </DockPanel>
+                
+                <AccessText Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">接收到</AccessText>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel>
+                        <ComboBox Name="StationType" Width="60" SelectionChanged="StationType_SelectionChanged">
+                        </ComboBox>
+                        <ComboBox Name="Order" Width="80"  ItemsSource="{StaticResource OrderInfosKey}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <TextBlock Margin="10,0,10,0" Text="->"></TextBlock>
+                                        <TextBlock Text="{Binding Desc}" Foreground="ForestGreen"></TextBlock>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBox Name="Tb_suffix" Width="60" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBox>
+                        <ComboBox Name="RW" Width="60"></ComboBox>
+                        <!--<ComboBox Name="Cb_DataStruct" Width="60"></ComboBox>-->
+                        <Button Name="BtCreate" Click="BtCreate_Click">生成</Button>
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <AccessText>数据结构选择</AccessText>
+                        <ComboBox Name="Cb_DataStruct" Width="140" SelectionChanged="Cb_DataStruct_SelectionChanged"></ComboBox>
+                        <CheckBox Name="IsStruct">应用到指令</CheckBox>
+                        <Button x:Name="Bt_SaveStruct" Click="Bt_SaveStruct_Click" Width="40">保存</Button>
+                        <Button x:Name="Bt_CreatStruct" Click="Bt_CreatStruct_Click"  Width="60">重新生成</Button>
+                    </DockPanel>
+
+                    <TextBox x:Name="Rt_Sent" Grid.Row="2" Grid.Column="0" Background="Azure" IsReadOnly="False" AcceptsReturn="True" TextWrapping="Wrap" ></TextBox>
+                </Grid>
+                
+                <TextBox Name="Rt_Receive" Grid.Row="1" Grid.Column="1" Background="Bisque" IsReadOnly="False" AcceptsReturn="True" TextWrapping="Wrap"  VerticalScrollBarVisibility="Auto"></TextBox>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>annotations</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <PackageIcon>debug.ico</PackageIcon>
+    <ApplicationIcon>debug.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+    <DefineConstants>$(DefineConstants);Debug</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataServerClient.xaml.cs" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+    <None Remove="Resource\first.jpg" />
+    <None Remove="Resource\iconfont.json" />
+    <None Remove="Resource\iconfont.ttf" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+	  <Page Remove="DataServerClient.xaml" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\MyTest\EData.cs" Link="EData.cs" />
+    <Compile Include="..\MyTest\Entityes\Command.cs" Link="Command.cs" />
+    <Compile Include="..\MyTest\MyWebsocketServer.cs" Link="MyWebsocketServer.cs" />
+    <Compile Include="..\MyTest\MyWSClient.cs" Link="MyWSClient.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="debug.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="E:\测试\ico\debug.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="myLib" Version="1.2024.10128.23" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.3.4" />
+    <PackageReference Include="ScottPlot.WPF" Version="5.0.39" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CC_MyLib\CC_MyLib.csproj" />
+    <ProjectReference Include="..\WpAtlDataServerClient\WpAtlDataServerClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\first.jpg" />
+    <Resource Include="Resource\iconfont.json" />
+    <Resource Include="Resource\iconfont.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="WebsocketServer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="app.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\过滤器配置.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="WebsocketServer.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

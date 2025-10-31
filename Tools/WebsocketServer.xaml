@@ -1,0 +1,156 @@
+﻿<Page x:Class="Tools.WebsocketServer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Tools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WebsocketServer" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+    <Page.Resources>
+        <local:DGroupsInfoList x:Key="DGroupInfos_Key"/>
+        <local:DGroupsInfoList2 x:Key="SecDGroupInfos_Key"/>
+        <local:Filter_NotDisplay x:Key="Filter_NotDisplay_Key"/>
+    </Page.Resources>
+    <Grid Background="{StaticResource Brush1}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"  HorizontalAlignment="Left">
+            <AccessText VerticalAlignment="Center" Text="本地服务器"/>
+            <TextBox  x:Name="Tb1_Addr" VerticalAlignment="Center" Width="175" Text="ws://+:54681/" Margin="10,0,10,0"></TextBox>
+            <ToggleButton VerticalAlignment="Center" Name="wsSwith"  Width="30" Height="30"    Style="{StaticResource LightToggleButtonStyle}"  Checked="wsSwith_Checked"  Unchecked="wsSwith_Unchecked"  Indeterminate="wsSwith_Indeterminate" />
+        </DockPanel>
+        
+
+        <DockPanel LastChildFill="True" Grid.Row="1"  Background="AliceBlue">
+            <Expander Header="选项" ExpandDirection="Right" IsExpanded="False"  Background="{StaticResource Brush3}">
+                <StackPanel Grid.Column="0" Background="{StaticResource Brush1}" Width="200">
+                    <Expander Header="功能键">
+                        <DockPanel>
+                            <Button Margin="5,5,5,5" Name="OpenCommand" Content="加载命令" Click="OpenCommand_Click"></Button>
+                            <Button Margin="5,5,5,5" Name="SendCommand" Content="发送命令" Click="SendCommand_Click"></Button>
+                            <Button Margin="5,5,5,5" Name="CreateCommandTemplate" Content="生成命令模板" Click="CreateCommandTemplate_Click"></Button>
+                        </DockPanel>
+                    </Expander>
+                    <Expander Header="设置">
+                        <Expander.Resources>
+                            <Style TargetType="ListBox">
+                                <Setter Property="FontSize" Value="10"/>
+                            </Style>
+                        </Expander.Resources>
+
+                        <StackPanel>
+                            <Expander Header="所有标识" IsExpanded="False">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" MouseDoubleClick="ScrollViewer_MouseDoubleClick">
+                                    <ListBox x:Name="AllGropList" ItemsSource="{StaticResource DGroupInfos_Key}" Height="200"  >
+                                        <ListBox.CommandBindings>
+                                            <CommandBinding Command="{x:Static ApplicationCommands.Copy}" CanExecute="CommandBinding_CopyCanExecute" Executed="CommandBinding_CopyExecuted"/>
+                                        </ListBox.CommandBindings>
+                                        <ListBox.InputBindings>
+                                            <KeyBinding Key="C" Modifiers="Ctrl" Command="{x:Static ApplicationCommands.Copy}"/>
+                                        </ListBox.InputBindings>
+                                    </ListBox>
+                                </ScrollViewer>
+                            </Expander>
+                            <Expander Header="显示标识" IsExpanded="False">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <ListBox Name="SecList" ItemsSource="{StaticResource SecDGroupInfos_Key}" Height="100" >
+                                        <ListBox.CommandBindings>
+                                            <CommandBinding Command="{x:Static ApplicationCommands.Paste}" CanExecute="CommandBinding_PasteCanExecute" Executed="CommandBinding_PasteExecute"/>
+                                            <CommandBinding Command="{x:Static ApplicationCommands.Delete}" CanExecute="CommandBinding_DeleteCanExecute" Executed="CommandBinding_DeleteExecuted"/>
+                                        </ListBox.CommandBindings>
+                                        <ListBox.InputBindings>
+                                            <KeyBinding Key="V" Modifiers="Ctrl" Command="{x:Static ApplicationCommands.Paste}"/>
+                                        </ListBox.InputBindings>
+                                        <!--<ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel></StackPanel>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>-->
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel FlowDirection="LeftToRight">
+                                                    <CheckBox VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsSave}" Margin="5,0,5,0" ></CheckBox>
+                                                    <TextBlock Text="{Binding Desc}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+                                                
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </ScrollViewer>
+                            </Expander>
+                            <Expander Header="过滤标识" IsExpanded="False">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <ListBox Name="NotDisplayList" ItemsSource="{StaticResource Filter_NotDisplay_Key}" Height="100">
+                                        <ListBox.CommandBindings>
+                                            <CommandBinding Command="{x:Static ApplicationCommands.Paste}" CanExecute="CommandBinding_PasteCanExecute" Executed="CommandBinding_PasteExecute"/>
+                                            <CommandBinding Command="{x:Static ApplicationCommands.Delete}" CanExecute="CommandBinding_DeleteCanExecute" Executed="CommandBinding_DeleteExecuted"/>
+                                        </ListBox.CommandBindings>
+                                        <ListBox.InputBindings>
+                                            <KeyBinding Key="V" Modifiers="Ctrl" Command="{x:Static ApplicationCommands.Paste}"/>
+                                        </ListBox.InputBindings>
+                                        <!--<ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <DockPanel FlowDirection="LeftToRight">
+                                                    --><!--<CheckBox VerticalAlignment="Center" HorizontalAlignment="Right" IsChecked="{Binding IsSave}" Margin="5,0,5,0" ></CheckBox>--><!--
+                                                    <TextBlock Text="{Binding Desc}" VerticalAlignment="Center" HorizontalAlignment="Left"></TextBlock>
+
+                                                </DockPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>-->
+                                    </ListBox>
+                                </ScrollViewer>
+                            </Expander>
+                            <CheckBox Content="否显示纯字符串信息" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsChecked="True"></CheckBox>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="选中的内容">
+                        <RichTextBox Name="Rt2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"></RichTextBox>
+                    </Expander>
+                </StackPanel>
+            </Expander>
+            <Expander Header="测试" Grid.Column="1" ExpandDirection="Right" IsExpanded="False" DockPanel.Dock="Right" Background="{StaticResource Brush3}">
+                <StackPanel Background="{StaticResource Brush1}">
+                    <Expander Header="功能">
+                        <StackPanel>
+                            <Button  Click="Button_Click_1">获取客户端</Button>
+                            <Button  Click="Button_Click">获取环境变量</Button>
+                            <Button Click="Button_Click_2">获取配置</Button>
+                            <Button Click="Button_Click_3" >分站模拟启动</Button>
+                            <Button Click="Button_Click_4">分站模拟停止</Button>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="执行">
+                        <StackPanel>
+                            <DockPanel LastChildFill="True" >
+                                <Label>客户端</Label>
+                                <ComboBox Name="ClientName" MinWidth="120" SelectionChanged="ClientName_SelectionChanged">
+                                    <ComboBox.ContextMenu>
+                                        <ContextMenu >
+                                            <MenuItem Header="刷新客户端" Click="MenuItem_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </ComboBox.ContextMenu>
+                                </ComboBox>
+                            </DockPanel>
+                            <DockPanel LastChildFill="True">
+                                <Label Width="34">类型</Label>
+                                <ComboBox Name="Com_Type" Margin="12,0,0,0" MinWidth="120" SelectionChanged="Com_Type_SelectionChanged" ></ComboBox>
+                            </DockPanel>
+                            <DockPanel LastChildFill="True" >
+                                <Button Name="RunTester" Click="RunTester_Click" Width="34">测试</Button>
+                                <ComboBox  Margin="12,0,0,0" Name="Tester" MinWidth="120" SelectionChanged="Tester_SelectionChanged" ></ComboBox>
+                            </DockPanel>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </Expander>
+            <DockPanel Grid.Column="1">
+                <RichTextBox x:Name="Rt1" Background="Black" Foreground="WhiteSmoke" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible"  SelectionChanged="Rt1_SelectionChanged"  ></RichTextBox>
+            </DockPanel>
+
+        </DockPanel>
+        
+    </Grid>
+</Page>

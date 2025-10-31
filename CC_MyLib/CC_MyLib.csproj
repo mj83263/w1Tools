@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>annotations</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataPointFPlot.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="DataPointFPlot.xaml" />
+  </ItemGroup>
+
+</Project>
