@@ -49,6 +49,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject4AutoFactor", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myBaseProider", "..\myBaseProider\myBaseProider.csproj", "{EF517BA4-AD74-4487-A5EC-9D9D1B9160C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "convertAtlAcademyConfigToW1", "..\convertAtlAcademyConfigToW1\convertAtlAcademyConfigToW1.csproj", "{406991EC-270D-4335-B590-49504CF8E1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvertAtlAcademyConfigUpdate", "..\ConvertAtlAcademyConfigUpdate\ConvertAtlAcademyConfigUpdate.csproj", "{10D7D635-0A30-4851-89BF-628AD6046487}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +151,14 @@ Global
 		{EF517BA4-AD74-4487-A5EC-9D9D1B9160C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF517BA4-AD74-4487-A5EC-9D9D1B9160C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF517BA4-AD74-4487-A5EC-9D9D1B9160C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{406991EC-270D-4335-B590-49504CF8E1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406991EC-270D-4335-B590-49504CF8E1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406991EC-270D-4335-B590-49504CF8E1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406991EC-270D-4335-B590-49504CF8E1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D7D635-0A30-4851-89BF-628AD6046487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D7D635-0A30-4851-89BF-628AD6046487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D7D635-0A30-4851-89BF-628AD6046487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D7D635-0A30-4851-89BF-628AD6046487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
