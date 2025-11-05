@@ -1,0 +1,16 @@
+{
+  "modelNo": "Test-526974-B00L-D",
+  "baseWeight": 113.62,
+  "netWeightA": 126.6,
+  "netWeightB": 126.6,
+  "singleTol": 4,
+  "doubleTol": 8,
+  "propCoef": 1.1,
+  "moveCoef": 0.3,
+  "scanStartPos": 1,
+  "scanEndPos": 50,
+  "calibTime": "B+kFDQgoCQ==",
+  "calibAirAD": 9651.67,
+  "calibMasterAD": 0.0,
+  "paramRemark": "myTest"
+}

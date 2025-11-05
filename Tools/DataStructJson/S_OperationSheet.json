@@ -1,0 +1,22 @@
+{
+  "modelNo": "Test-526974-B00L-D",
+  "baseWeight": 113.62,
+  "netWeightA": 126.6,
+  "netWeightB": 126.6,
+  "singleTol": 4,
+  "doubleTol": 8,
+  "propCoef1": 1.1,
+  "moveCoef1": 0.3,
+  "propCoef2": 1.911,
+  "moveCoef2": -49.19,
+  "propCoef3": 1.1898,
+  "moveCoef3": -10.63,
+  "FilmLength": 1000,
+  "BaseWidth": 581,
+  "scanStartPos": 1,
+  "scanEndPos": 50,
+  "calibTime": "B+kFDQgoCQ==",
+  "calibAirAD": 9651.67,
+  "calibMasterAD": 0.0,
+  "paramRemark": "myTest"
+}

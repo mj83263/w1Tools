@@ -1,0 +1,23 @@
+{
+  "modelNo": "Test2",
+  "baseWeight": 0.0,
+  "netWeightA": 0.0,
+  "netWeightB": 0.0,
+  "singleTol": 0.0,
+  "doubleTol": 0.0,
+  "propCoef1": 0.0,
+  "moveCoef1": 0.0,
+  "propCoef2": 0.0,
+  "moveCoef2": 0.0,
+  "propCoef3": 0.0,
+  "moveCoef3": 0.0,
+  "FilmLength": 0.0,
+  "BaseWidth": 0.0,
+  "ShelfNumber": 0,
+  "scanStartPos": 0,
+  "scanEndPos": 0,
+  "calibTime": null,
+  "calibAirAD": 0.0,
+  "calibMasterAD": 0.0,
+  "paramRemark": null
+}

@@ -1,0 +1,18 @@
+{
+  "H1": 0,
+  "H2": 1,
+  "H3": true,
+  "TdataConvert": {},
+  "TData": {
+    "fBorderFilterDistancel": 501.0,
+    "fMidFilterWidth": 18.1,
+    "fLeftFilterWidth": 5.1,
+    "fRightFilterWidth": 465.6,
+    "nTapesNumber": 4.0
+  },
+  "ResponseType": 0,
+  "DataAction": 1,
+  "NeedResponse": true,
+  "Header": "FILTERONSHEET",
+  "Data": "AAAAAAAAAAAAAAAAAAAAAAAAAAA="
+}
