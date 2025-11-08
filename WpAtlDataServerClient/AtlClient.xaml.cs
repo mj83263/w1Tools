@@ -487,7 +487,7 @@ namespace WpAtlDataServerClient
                         ,
                         SubStationOrder.CALIBDATA => () =>
                         {
-                            if (req is Request<string> _req&&!_req.TData.Contains("@"))
+                            if (req is Request<string> _req&&_req.TData.EndsWith("@X"))
                             {
                                 if (client.GetResource<string, float[]>(req as Request<string>, out var response))
                                     outMsg = JsonConvert.SerializeObject(response, JsonSettings);
