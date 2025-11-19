@@ -105,6 +105,9 @@
     <None Update="DataStructJson\SWITCHVALIDATIONFORMULA.json.bak">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="DataStructJson\S_BorderFilterSettingAtlAcademy.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DataStructJson\S_BorderFilterSetting.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -167,8 +167,16 @@ namespace atlTcpPackage
             public float nTapesNumber; //胶带数量  20250505  跟崔工确认这个要用float类型
 
         };
+        public struct S_BorderFilterSettingAtlAcademy
+        {
+            public float fBorderFilterDistancel; //基材宽度
+            public float fMidFilterWidth;//胶带宽度
+            public float fLeftFilterWidth;//边缘铜箔宽度
+            public float fRightFilterWidth; //单条膜宽
+            public int nTapesNumber; 
 
-       public class StabilizeInfo
+        };
+        public class StabilizeInfo
         {
             public bool IsStabilize { set; get; }
         }

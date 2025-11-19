@@ -31,6 +31,8 @@ namespace atlTcpPackage
                     return BitConverter.GetBytes(fdata);
                 else if (value is atlTcpPackage.DataStruct.S_BorderFilterSetting _s_BorderFiterSetting)
                     return MarshalHelper.StructureToBytes<atlTcpPackage.DataStruct.S_BorderFilterSetting>(_s_BorderFiterSetting);
+                else if (value is atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy _s_BorderFiterSettingAtlAcademy)
+                    return MarshalHelper.StructureToBytes<atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy>(_s_BorderFiterSettingAtlAcademy);
                 else if (value is atlTcpPackage.DataStruct.S_OperationSheet s_operationSheet)
                     return MarshalHelper.StructureToBytes<atlTcpPackage.DataStruct.S_OperationSheet>(s_operationSheet);
                 else if (value is atlTcpPackage.DataStruct.S_OperationSheet_3 _s_OperationSheet_3)
@@ -55,6 +57,8 @@ namespace atlTcpPackage
                     return BitConverter.ToSingle(bytes.Take(4).ToArray());
                 else if (type == typeof(atlTcpPackage.DataStruct.S_BorderFilterSetting))
                     return MarshalHelper.StructureFromBytes<atlTcpPackage.DataStruct.S_BorderFilterSetting>(bytes);
+                else if (type == typeof(atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy))
+                    return MarshalHelper.StructureFromBytes<atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy>(bytes);
                 else if (type == typeof(atlTcpPackage.DataStruct.S_OperationSheet))
                     return MarshalHelper.StructureFromBytes<atlTcpPackage.DataStruct.S_OperationSheet>(bytes);
                 else if (type == typeof(atlTcpPackage.DataStruct.S_OperationSheet_3))

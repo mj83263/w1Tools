@@ -65,6 +65,7 @@ namespace WpAtlDataServerClient
             Cb_DataStruct.Items.Clear();
             Cb_DataStruct.Items.Add("None");
             Cb_DataStruct.Items.Add(nameof(atlTcpPackage.DataStruct.S_BorderFilterSetting));
+            Cb_DataStruct.Items.Add(nameof(atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy));
             Cb_DataStruct.Items.Add(nameof(atlTcpPackage.DataStruct.S_OperationSheet));
             Cb_DataStruct.Items.Add(nameof(atlTcpPackage.DataStruct.S_OperationSheet_sub));
             Cb_DataStruct.Items.Add(nameof(atlTcpPackage.DataStruct.S_OperationSheet_SingleShelfR));
@@ -162,7 +163,7 @@ namespace WpAtlDataServerClient
                         or MainStationOrder.ATLSPECIALINFO
                         => () =>
                         {
-                            if (client.GetResource<byte[], float[]>(req as Request<byte[]>, out var response))
+                            if (client.GetResource<byte[], byte[]>(req as Request<byte[]>, out var response))
                                 outMsg = JsonConvert.SerializeObject(response, JsonSettings);
                             else
                                 outMsg = $"{order.ToString()}指令执行失败..";
@@ -353,10 +354,26 @@ namespace WpAtlDataServerClient
                         },
                         SubStationOrder.FILTERONSHEET => () =>
                         {
-                            if (client.GetResource<S_BorderFilterSetting, byte[]>(req as Request<S_BorderFilterSetting>, out var response))
-                                outMsg = JsonConvert.SerializeObject(response, formatting: Formatting.Indented, JsonSettings);
+                            var praTypeName = this.Cb_DataStruct.SelectedItem.ToString();
+                            if(praTypeName==nameof(atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy))
+                            {
+                                if (client.GetResource<atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy, byte[]>(req as Request<atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy>, out var response))
+                                    outMsg = JsonConvert.SerializeObject(response, formatting: Formatting.Indented, JsonSettings);
+                                else
+                                    outMsg = $"{order.ToString()}指令执行失败..";
+                            }
+                            else if(praTypeName == nameof(atlTcpPackage.DataStruct.S_BorderFilterSetting))
+                            {
+                                if (client.GetResource<S_BorderFilterSetting, byte[]>(req as Request<S_BorderFilterSetting>, out var response))
+                                    outMsg = JsonConvert.SerializeObject(response, formatting: Formatting.Indented, JsonSettings);
+                                else
+                                    outMsg = $"{order.ToString()}指令执行失败..";
+                            }
                             else
-                                outMsg = $"{order.ToString()}指令执行失败..";
+                            {
+                                outMsg = $"{order.ToString()}数据类型未能识别";
+                            }
+
                         }
                         ,
                         SubStationOrder.OPERATIONSHEET => () =>
@@ -669,9 +686,20 @@ namespace WpAtlDataServerClient
                             return new Request<byte[]>(rw, order.ToString(), null, atlFormatterConverter);
                         else
                         {
+                            var praTypeName = this.Cb_DataStruct.SelectedItem.ToString();
                             var file = System.IO.Path.Combine(DataStructJsonDir.FullName, this.Cb_DataStruct.SelectedItem.ToString() + ".json");
-                            var body = File.Exists(file) ? JsonConvert.DeserializeObject<atlTcpPackage.DataStruct.S_BorderFilterSetting>(File.ReadAllText(file)) : new DataStruct.S_BorderFilterSetting();
-                            return new Request<DataStruct.S_BorderFilterSetting>(rw, order.ToString(), body, atlFormatterConverter);
+                            if (praTypeName == nameof(atlTcpPackage.DataStruct.S_BorderFilterSetting))
+                            {
+                                var body = File.Exists(file) ? JsonConvert.DeserializeObject<atlTcpPackage.DataStruct.S_BorderFilterSetting>(File.ReadAllText(file)) : new DataStruct.S_BorderFilterSetting();
+                                return new Request<DataStruct.S_BorderFilterSetting>(rw, order.ToString(), body, atlFormatterConverter);
+                            }
+                            else if (praTypeName == nameof(atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy))
+                            {
+                                var body = File.Exists(file) ? JsonConvert.DeserializeObject<atlTcpPackage.DataStruct.S_BorderFilterSettingAtlAcademy>(File.ReadAllText(file)) : new DataStruct.S_BorderFilterSettingAtlAcademy();
+                                return new Request<DataStruct.S_BorderFilterSettingAtlAcademy>(rw, order.ToString(), body, atlFormatterConverter);
+                            }
+                            else
+                                return null;
                         }
                     }).Invoke(),
                     SubStationOrder.OPERATIONSHEET => new Func<PackInfo.RequestPackage>(() =>
