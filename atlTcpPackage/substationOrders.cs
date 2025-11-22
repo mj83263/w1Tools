@@ -152,6 +152,11 @@ namespace atlTcpPackage
         SWITCHVALIDATIONFORMULA,
         NEWGETDATA,
         [Description("拉平")]
-        STABILIZE
+        STABILIZE,
+
+        [Description("读取OOCC四架KB值")]
+        CENTROL_OPERATIONSHEET,
+        [Description("读取OOCC四架实时数据,1~4架对应固定排序XBXB  格式:指令-架号")]
+        GETREALMMDATA
     }
 }

@@ -206,6 +206,38 @@ namespace atlTcpPackage
             public byte[] _DataGroups;
             public DInfo[] Dinfos { set; get; }
         }
+        /// <summary>
+        /// 这个是ATL专门用于读KB值的指令 CENTROL_OPERATIONSHEET
+        /// </summary>
+        public struct OperationSheetFor4
+        {
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string ModelNo;//品种名称（单面S，双面D）
+            public float baseWeight;//基材重
+            public float netWeightA;//A面净重
+            public float netWeightB;//B面净重
+            public float BaseTol;//基差公差
+            public float singleTol;//单面公差
+            public float doubleTol;//双面公差
+            public float propCoef1;//X1 K
+            public float moveCoef1;//X1 B
+            public float propCoef2;//B1 K
+            public float MoveCoef2;//B1 B
+            public float propCoef3;//X2 K
+            public float MoveCoef3;//X2 B
+            public float propCoef4;//B2 K
+            public float moveCoef4;//B2 B
+            public float propCoef5;//单层辅助定K
+            public float moveCoef5;//单层辅助标定B
+            [MarshalAs(unmanagedType: UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string paramRemark;//备注
+            public Int32 scanStartPos;//扫描起始分区
+            public Int32 scanEndPos;//扫描终止分区
+            public Int32 mebraneLength;//膜片长度
+            public float baseAlarmTol;//基材报警公差
+            public float singleAlarmTol;//单面报警公差
+            public float doubleAlarmTol;//双面报警公差
+        }
     }
 
 }

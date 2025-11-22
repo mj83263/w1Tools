@@ -319,6 +319,22 @@ namespace WpAtlDataServerClient
                             }
                         }
                         ,
+                        MainStationOrder.GETREALMMDATA => () => 
+                        {
+                            if (client.GetResource<Byte[], string>(req as Request<byte[]>, out var response))
+                                outMsg = JsonConvert.SerializeObject(response, JsonSettings);
+                            else
+                                outMsg = $"{order.ToString()}指令执行失败..";
+                        }
+                        ,
+                        MainStationOrder.CENTROL_OPERATIONSHEET => () =>
+                        {
+                            if (client.GetResource<Byte[], atlTcpPackage.DataStruct.OperationSheetFor4>(req as Request<byte[]>, out var response))
+                                outMsg = JsonConvert.SerializeObject(response, JsonSettings);
+                            else
+                                outMsg = $"{order.ToString()}指令执行失败..";
+                        }
+                        ,
                         _ => () => outMsg = $"{order.ToString()}是个未知的指令",
                     };
                     ac.Invoke();
@@ -614,6 +630,7 @@ namespace WpAtlDataServerClient
                     MainStationOrder.DATAENVIRONMENT => new Request<byte[]>(rw, order.ToString(), null, atlFormatterConverter),
                     MainStationOrder.SPECIAL_BF => new Request<byte[]>(rw, order.ToString(), null, atlFormatterConverter),
                     MainStationOrder.SPECIAL_BI => new Request<byte[]>(rw, order.ToString(), null, atlFormatterConverter),
+                    MainStationOrder.CENTROL_OPERATIONSHEET=> new Request<byte[]>(rw, order.ToString(), null, atlFormatterConverter),
                     MainStationOrder.ATLSUTTLEWEIGHT => new Request<byte[]>(rw, order.ToString() + this.Tb_suffix.Text.Trim().ToUpper().ToString(), null, atlFormatterConverter),
                     MainStationOrder.MMATLSUTTLEWEIGHT => new Request<byte[]>(rw, order.ToString() + this.Tb_suffix.Text.Trim().ToUpper().ToString(), null, atlFormatterConverter),
                     MainStationOrder.MMSUTTLEWEIGHT => new Request<byte[]>(rw, order.ToString() + this.Tb_suffix.Text.Trim().ToUpper().ToString(), null, atlFormatterConverter),
@@ -628,7 +645,7 @@ namespace WpAtlDataServerClient
                             return new Request<string>(rw, order.ToString(), body, atlFormatterConverter);
                         }
                     }).Invoke(),
-                    MainStationOrder.ATLWEIGHT => new Request<byte[]>(rw, order.ToString() + this.Tb_suffix.Text.Trim().ToUpper().ToString(), null, atlFormatterConverter),
+                    MainStationOrder.ATLWEIGHT or MainStationOrder.GETREALMMDATA => new Request<byte[]>(rw, order.ToString() + this.Tb_suffix.Text.Trim().ToUpper().ToString(), null, atlFormatterConverter),
                     MainStationOrder.FILTERONSHEET => new Func<PackInfo.RequestPackage>(() =>
                     {
                         if (rw == PackInfo.RequestDataAction.Read)
